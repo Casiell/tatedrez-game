@@ -57,12 +57,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8e7ffb0bde5cda74f905978b66ac3c78, type: 3}
   - {fileID: 21300000, guid: c0e4e3dc10762654cb1ae35b5a79eeb2, type: 3}
   m_PackedSpriteNamesToIndex:
-  - b_rook_png_512px
-  - w_rook_png_512px
-  - w_knight_png_512px
-  - b_knight_png_512px
-  - b_bishop_png_512px
-  - w_bishop_png_512px
+  - b_rook
+  - w_rook
+  - w_knight
+  - b_knight
+  - b_bishop
+  - w_bishop
   m_RenderDataMap: {}
   m_Tag: ChessPieces
   m_IsVariant: 0

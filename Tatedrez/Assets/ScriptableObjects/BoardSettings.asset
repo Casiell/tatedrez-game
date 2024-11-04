@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c4c92ef392c44aa7e598f0a388ae0, type: 3}
+  m_Name: BoardSettings
+  m_EditorClassIdentifier: 
+  squareSize: 6
+  boardSize: {x: 3, y: 3}
+  darkPrefab: {fileID: 1256977905929693399, guid: 66d0ffa625f7a0b4980c3825bdc92737, type: 3}
+  lightPrefab: {fileID: 8677787412909744537, guid: 421ca305a34c045409af574ef91a7e98, type: 3}
