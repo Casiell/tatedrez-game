@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Board;
 using Pieces;
+using UI;
 using UnityEngine;
 
 namespace Game
@@ -13,6 +14,7 @@ namespace Game
         [SerializeField] private PiecesSetupSettings piecesSettings;
         [SerializeField] private Transform whitePieceParent;
         [SerializeField] private Transform blackPieceParent;
+        [SerializeField] private InfoPanel infoPanel;
 
         private List<PieceController> pieces;
     
@@ -34,7 +36,7 @@ namespace Game
         {
             victoryChecker = new VictoryChecker(boardManager);
             piecePlacingController = new FirstPhasePlacingController(boardManager, this, pieces);
-            turnController = new TurnController(victoryChecker);
+            turnController = new TurnController(victoryChecker, infoPanel);
             turnController.SetPiecePlacingController(piecePlacingController);
         }
 

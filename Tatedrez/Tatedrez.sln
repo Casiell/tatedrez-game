@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game.csproj", "{c3a
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pieces", "Pieces.csproj", "{8fb154bc-79f3-3ed5-7cdf-4ee1bfa8e381}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI.csproj", "{7e50ea91-06f9-12bd-b36c-ee6d85ba427f}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{4e352e21-1bb2-b2de-ca9d-031206686685}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +22,10 @@ Global
 		{c3a0bfd5-1fe5-c576-a02c-10c67dc5349c}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8fb154bc-79f3-3ed5-7cdf-4ee1bfa8e381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8fb154bc-79f3-3ed5-7cdf-4ee1bfa8e381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7e50ea91-06f9-12bd-b36c-ee6d85ba427f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7e50ea91-06f9-12bd-b36c-ee6d85ba427f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4e352e21-1bb2-b2de-ca9d-031206686685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4e352e21-1bb2-b2de-ca9d-031206686685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

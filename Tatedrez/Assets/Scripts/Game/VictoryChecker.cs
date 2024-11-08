@@ -62,7 +62,6 @@ namespace Game
 
                 if (consecutivePieces == distanceToCheck)
                 {
-                    Debug.Log($"{color.ToString()} won");
                     return true;
                 }
             }

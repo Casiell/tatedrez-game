@@ -40,6 +40,7 @@ namespace Pieces
 
     public enum PieceColor
     {
+        None,
         White,
         Black
     }

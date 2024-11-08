@@ -1,4 +1,6 @@
-﻿using Pieces;
+﻿using System.Threading.Tasks;
+using Pieces;
+using UI;
 using UnityEngine;
 
 namespace Game
@@ -6,36 +8,37 @@ namespace Game
     public class TurnController
     {
         private readonly VictoryChecker victoryChecker;
+        private readonly InfoPanel infoPanel;
         private PieceColor currentPlayer;
         private IPiecePlacingController piecePlacingController;
 
-        public TurnController(VictoryChecker victoryChecker)
+        public TurnController(VictoryChecker victoryChecker, InfoPanel infoPanel)
         {
             this.victoryChecker = victoryChecker;
-            currentPlayer = Random.Range(0, 2) == 1 ? PieceColor.White : PieceColor.Black;
-            Debug.Log($"Starting player {currentPlayer}");
+            this.infoPanel = infoPanel;
+            var randomPlayer = Random.Range(0, 2) == 1 ? PieceColor.White : PieceColor.Black;
+            ChangePlayer(randomPlayer);
         }
 
         public void SetPiecePlacingController(IPiecePlacingController piecePlacingController)
         {
             this.piecePlacingController = piecePlacingController;
             piecePlacingController.OnPiecePlaced += OnPiecePlaced;
-            this.piecePlacingController.SetActivePlayer(currentPlayer);
+            ChangePlayer(currentPlayer);
         }
 
         private void OnPiecePlaced(PieceController piece, Vector2Int position)
         {
             if (victoryChecker.IsGameWon(piece, position))
             {
-                Debug.Log($"Player {piece.Color} won!");
+                _ = infoPanel.SetPlayerVictory(piece.Color.ToString());
                 return;
             }
             var currentPlayerColor = piece.Color;
             var otherPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
             if (piecePlacingController.CanMovePiece(otherPlayerColor))
             {
-                currentPlayer = otherPlayerColor;
-                piecePlacingController.SetActivePlayer(currentPlayer);
+                ChangePlayer(otherPlayerColor);
             }
             else
             {
@@ -44,6 +47,18 @@ namespace Game
                     Debug.LogError("No player can move a piece. If this happened there is probably some kind of misconfiguration");
                 }
             }
+        }
+
+        private async void ChangePlayer(PieceColor otherPlayerColor)
+        {
+            currentPlayer = otherPlayerColor;
+            if (infoPanel)
+            {
+                piecePlacingController?.SetActivePlayer(PieceColor.None);
+
+                await infoPanel.SetPlayerInfo(currentPlayer.ToString());
+            }
+            piecePlacingController?.SetActivePlayer(currentPlayer);
         }
     }
 }
