@@ -6,18 +6,34 @@ namespace Game
     public class TurnController
     {
         private const PieceColor StartingPlayer = PieceColor.White;
+        private PieceColor currentPlayer;
+        private PiecePlacingController piecePlacingController;
         
         public TurnController(BoardManager boardManager)
         {
             boardManager.OnPiecePlaced += OnPiecePlaced;
         }
 
-        private void OnPiecePlaced(PieceController arg1, Vector2Int arg2)
+        public void SetPiecePlacingController(PiecePlacingController piecePlacingController)
         {
-            //if other played can make move
-            //switch to other player
-            //else
-            //stay with current player
+            this.piecePlacingController = piecePlacingController;
+            this.piecePlacingController.SetActivePlayer(currentPlayer);
+        }
+
+        private void OnPiecePlaced(PieceController piece, Vector2Int position)
+        {
+            var currentPlayerColor = piece.Color;
+            var otherPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
+            if (piecePlacingController.CanMovePiece(otherPlayerColor))
+            {
+                currentPlayer = otherPlayerColor;
+                piecePlacingController.SetActivePlayer(currentPlayer);
+            }
+
+            if (!piecePlacingController.CanMovePiece(currentPlayerColor))
+            {
+                Debug.LogError("No player can move a piece. If this happened there is probably some kind of misconfiguration");
+            }
         }
     }
 }

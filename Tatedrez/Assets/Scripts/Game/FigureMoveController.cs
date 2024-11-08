@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Pieces;
 using UnityEngine;
 
@@ -25,6 +26,24 @@ namespace Game
             }
 
             return squares;
+        }
+
+        public override bool CanMovePiece(PieceColor color)
+        {
+            foreach (var piece in AllPieces)
+            {
+                if (piece.Color != color)
+                {
+                    continue;
+                }
+
+                if (GetAllValidSquares(piece).Any())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private IEnumerable<BoardSpace> GetSquares(Vector2Int direction, Vector2Int startPosition, bool canMoveInfinitely)

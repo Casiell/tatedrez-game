@@ -20,6 +20,7 @@ namespace Game
         private BoardGenerator boardGenerator;
         private BoardManager boardManager;
         private VictoryChecker victoryChecker;
+        private TurnController turnController;
     
         private void Start()
         {
@@ -33,7 +34,8 @@ namespace Game
         {
             victoryChecker = new VictoryChecker(boardManager);
             piecePlacingController = new FirstPhasePlacingController(boardManager, this, pieces);
-
+            turnController = new TurnController(boardManager);
+            turnController.SetPiecePlacingController(piecePlacingController);
         }
 
         private void SetupPieces()
@@ -69,6 +71,7 @@ namespace Game
         {
             Debug.Log("Starting next phase");
             piecePlacingController = new FigureMoveController(boardManager, pieces);
+            turnController.SetPiecePlacingController(piecePlacingController);
         }
     }
 }

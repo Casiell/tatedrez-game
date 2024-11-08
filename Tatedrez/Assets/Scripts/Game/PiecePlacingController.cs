@@ -17,6 +17,7 @@ namespace Game
         }
 
         private readonly List<BoardSpace> validSquaresForCurrentPiece = new();
+        private PieceColor currentPlayer;
 
         protected PiecePlacingController(BoardManager boardManager, List<PieceController> pieces)
         {
@@ -58,6 +59,10 @@ namespace Game
 
         protected void PieceClicked(PieceController piece)
         {
+            if (piece.Color != currentPlayer)
+            {
+                return;
+            }
             if (SelectedPiece == piece)
             {
                 DeselectCurrentPiece();
@@ -86,6 +91,13 @@ namespace Game
             SelectedPiece = null;
             validSquaresForCurrentPiece.Clear();
             BoardManager.ClearBoardHighlights();
+        }
+        
+        public abstract bool CanMovePiece(PieceColor color);
+
+        public void SetActivePlayer(PieceColor color)
+        {
+            currentPlayer = color;
         }
     }
 }

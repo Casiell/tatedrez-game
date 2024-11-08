@@ -30,7 +30,12 @@ namespace Game
 
         protected override IEnumerable<BoardSpace> GetAllValidSquares(PieceController piece)
         {
-            return BoardManager.GetAllSquares(x => !x.IsBusy).ToList();
+            return BoardManager.GetAllSquares(x => !x.IsBusy);
+        }
+
+        public override bool CanMovePiece(PieceColor color)
+        {
+            return AllPieces.Any(x => x.Color == color) && GetAllValidSquares(null).Any();
         }
     }
 }
