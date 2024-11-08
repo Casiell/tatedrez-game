@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6359a9a67ecdf5f4fbc3a4a32e8065c0, type: 3}
+  m_Name: Bishop
+  m_EditorClassIdentifier: 
+  pieceType: 2
+  whiteSprite: {fileID: 21300000, guid: c0e4e3dc10762654cb1ae35b5a79eeb2, type: 3}
+  blackSprite: {fileID: 21300000, guid: 8e7ffb0bde5cda74f905978b66ac3c78, type: 3}
+  movement:
+  - {x: 1, y: 1}
+  - {x: -1, y: -1}
+  - {x: 1, y: -1}
+  - {x: -1, y: 1}
+  canMoveInfinitely: 1
+  isBlockedByOtherPieces: 1
