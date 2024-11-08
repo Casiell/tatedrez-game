@@ -6,14 +6,14 @@ namespace Game
     public class TurnController
     {
         private readonly VictoryChecker victoryChecker;
-        private const PieceColor StartingPlayer = PieceColor.White;
         private PieceColor currentPlayer;
         private IPiecePlacingController piecePlacingController;
 
         public TurnController(VictoryChecker victoryChecker)
         {
             this.victoryChecker = victoryChecker;
-            currentPlayer = StartingPlayer;
+            currentPlayer = Random.Range(0, 2) == 1 ? PieceColor.White : PieceColor.Black;
+            Debug.Log($"Starting player {currentPlayer}");
         }
 
         public void SetPiecePlacingController(IPiecePlacingController piecePlacingController)
@@ -41,8 +41,7 @@ namespace Game
             {
                 if (!piecePlacingController.CanMovePiece(currentPlayerColor))
                 {
-                    Debug.LogError(
-                        "No player can move a piece. If this happened there is probably some kind of misconfiguration");
+                    Debug.LogError("No player can move a piece. If this happened there is probably some kind of misconfiguration");
                 }
             }
         }
