@@ -1,0 +1,17 @@
+Game is divided into four assemblies, each responsible for its own thing.
+Board and Pieces are responsible for setup and details of their respective game elements
+Game is responsible for general setup and game flow
+And UI (very bare bones) is of course responsible for UI view
+
+All the settings that may be used for the game are seperated between a few scriptable objects
+This includes board dimensions, starting piece options and piece movement patterns
+
+Everything is dynamically instantiated (as opposed to being prefabs) to allow for potential faster iterations over the most changed options
+
+GameSetup class is responsible for setting up dependencies between modules (may be replaced by a dependency injection framework)
+Board squares and pieces are generated in respective classes that manage the whole setup
+Pieces additionally have a factory, as each piece has a substantial amount of code required to initiate it properly, therefore warranting a dedicated class
+
+For gameplay there are two major classes
+General game flow is controlled by TurnController. It's responsible for switching between player turns and game phases (piece setup and movement)
+Each phase has its own separate controller with a common base class
