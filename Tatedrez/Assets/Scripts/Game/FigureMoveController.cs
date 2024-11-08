@@ -46,6 +46,11 @@ namespace Game
             return false;
         }
 
+        public override bool IsPhaseFinished()
+        {
+            return false;
+        }
+
         private IEnumerable<BoardSpace> GetSquares(Vector2Int direction, Vector2Int startPosition, bool canMoveInfinitely)
         {
             while (true)

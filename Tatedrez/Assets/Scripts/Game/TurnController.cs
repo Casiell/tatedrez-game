@@ -1,4 +1,5 @@
-﻿using Pieces;
+﻿using System.Collections.Generic;
+using Pieces;
 using UI;
 using UnityEngine;
 
@@ -8,22 +9,26 @@ namespace Game
     {
         private readonly VictoryChecker victoryChecker;
         private readonly InfoPanel infoPanel;
+        private readonly BoardManager boardManager;
         private PieceColor currentPlayer;
         private IPiecePlacingController piecePlacingController;
+        private readonly List<PieceController> pieces;
 
-        public TurnController(VictoryChecker victoryChecker, InfoPanel infoPanel)
+        public TurnController(VictoryChecker victoryChecker, InfoPanel infoPanel, BoardManager boardManager, List<PieceController> pieces)
         {
             this.victoryChecker = victoryChecker;
             this.infoPanel = infoPanel;
+            this.boardManager = boardManager;
+            this.pieces = pieces;
+            UpdatePiecePlacingController(new FirstPhasePlacingController(boardManager, pieces));
             var randomPlayer = Random.Range(0, 2) == 1 ? PieceColor.White : PieceColor.Black;
             ChangePlayer(randomPlayer);
         }
 
-        public void SetPiecePlacingController(IPiecePlacingController piecePlacingController)
+        private void UpdatePiecePlacingController(IPiecePlacingController piecePlacingController)
         {
             this.piecePlacingController = piecePlacingController;
             piecePlacingController.OnPiecePlaced += OnPiecePlaced;
-            ChangePlayer(currentPlayer);
         }
 
         private void OnPiecePlaced(PieceController piece, Vector2Int position)
@@ -32,6 +37,12 @@ namespace Game
             {
                 _ = infoPanel.SetPlayerVictory(piece.Color.ToString());
                 return;
+            }
+
+            if (piecePlacingController.IsPhaseFinished())
+            {
+                piecePlacingController?.Dispose();
+                UpdatePiecePlacingController(new FigureMoveController(boardManager, pieces));
             }
             var currentPlayerColor = piece.Color;
             var otherPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;

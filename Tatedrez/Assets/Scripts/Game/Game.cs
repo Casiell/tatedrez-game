@@ -35,9 +35,7 @@ namespace Game
         private void SetupGameRules()
         {
             victoryChecker = new VictoryChecker(boardManager);
-            piecePlacingController = new FirstPhasePlacingController(boardManager, this, pieces);
-            turnController = new TurnController(victoryChecker, infoPanel);
-            turnController.SetPiecePlacingController(piecePlacingController);
+            turnController = new TurnController(victoryChecker, infoPanel, boardManager, pieces);
         }
 
         private void SetupPieces()
@@ -61,13 +59,6 @@ namespace Game
             var boardHeight = boardGenerator.GetHalfBoardHeight();
             whitePieceParent.transform.position = Vector3.up * (boardHeight + halfPieceSize + offset);
             blackPieceParent.transform.position = Vector3.down * (boardHeight + halfPieceSize + offset);
-        }
-
-        public void MoveToNextStep()
-        {
-            Debug.Log("Starting next phase");
-            piecePlacingController = new FigureMoveController(boardManager, pieces);
-            turnController.SetPiecePlacingController(piecePlacingController);
         }
     }
 }

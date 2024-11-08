@@ -14,7 +14,7 @@ namespace Pieces
             var piecesCount = pieceSettings.AvailablePieces.Count;
             for (var i = 0; i < piecesCount; i++)
             {
-                var position = new Vector2((i - piecesCount / 2) * 6, 0);
+                var position = new Vector3((i - piecesCount / 2) * 6, 0, 0);
             
                 var availablePiece = pieceSettings.AvailablePieces[i];
                 var piece = factory.Create(availablePiece, PieceColor.Black, blackPieceParent, position);

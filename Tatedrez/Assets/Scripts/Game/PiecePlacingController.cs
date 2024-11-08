@@ -22,6 +22,7 @@ namespace Game
 
         private readonly List<BoardSpace> validSquaresForCurrentPiece = new();
         private PieceColor currentPlayer;
+        private IPiecePlacingController piecePlacingControllerImplementation;
 
         protected PiecePlacingController(BoardManager boardManager, List<PieceController> pieces)
         {
@@ -104,6 +105,18 @@ namespace Game
         public void SetActivePlayer(PieceColor color)
         {
             currentPlayer = color;
+        }
+
+        public abstract bool IsPhaseFinished();
+
+        public void Dispose()
+        {
+            OnPiecePlaced = null;
+            foreach (var piece in AllPieces)
+            {
+                piece.OnClick -= PieceClicked;
+            }
+            AllPieces.Clear();
         }
     }
 }

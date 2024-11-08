@@ -7,11 +7,8 @@ namespace Game
 {
     public class FirstPhasePlacingController : PiecePlacingController
     {
-        private readonly Game gameManager;
-
-        public FirstPhasePlacingController(BoardManager boardManager, Game gameManager, List<PieceController> pieces) : base(boardManager, pieces)
+        public FirstPhasePlacingController(BoardManager boardManager, List<PieceController> pieces) : base(boardManager, pieces)
         {
-            this.gameManager = gameManager;
             boardManager.OnSquareSelected += OnSquareSelected;
         }
 
@@ -19,11 +16,6 @@ namespace Game
         {
             SelectedPiece.OnClick -= PieceClicked;
             AllPieces.Remove(SelectedPiece);
-
-            if (AllPieces.Count == 0)
-            {
-                gameManager.MoveToNextStep();
-            }
 
             base.PlacePiece(square);
         }
@@ -36,6 +28,11 @@ namespace Game
         public override bool CanMovePiece(PieceColor color)
         {
             return AllPieces.Any(x => x.Color == color) && GetAllValidSquares(null).Any();
+        }
+
+        public override bool IsPhaseFinished()
+        {
+            return !AllPieces.Any();
         }
     }
 }
