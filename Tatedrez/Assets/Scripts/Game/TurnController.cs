@@ -25,10 +25,11 @@ namespace Game
             ChangePlayer(randomPlayer);
         }
 
-        private void UpdatePiecePlacingController(IPiecePlacingController piecePlacingController)
+        private void UpdatePiecePlacingController(IPiecePlacingController newPiecePlacingController)
         {
-            this.piecePlacingController = piecePlacingController;
-            piecePlacingController.OnPiecePlaced += OnPiecePlaced;
+            piecePlacingController?.Dispose();
+            piecePlacingController = newPiecePlacingController;
+            newPiecePlacingController.OnPiecePlaced += OnPiecePlaced;
         }
 
         private void OnPiecePlaced(PieceController piece, Vector2Int position)
@@ -41,7 +42,6 @@ namespace Game
 
             if (piecePlacingController.IsPhaseFinished())
             {
-                piecePlacingController?.Dispose();
                 UpdatePiecePlacingController(new FigureMoveController(boardManager, pieces));
             }
             var currentPlayerColor = piece.Color;
