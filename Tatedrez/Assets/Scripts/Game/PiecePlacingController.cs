@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Board;
 using Pieces;
+using UnityEngine;
 
 namespace Game
 {
-    public abstract class PiecePlacingController
+    public abstract class PiecePlacingController : IPiecePlacingController
     {
+        public event Action<PieceController, Vector2Int> OnPiecePlaced;
+
         protected readonly BoardManager BoardManager;
     
         protected readonly List<PieceController> AllPieces;
@@ -53,6 +57,8 @@ namespace Game
         protected virtual void PlacePiece(SquareController square)
         {
             SelectedPiece.MoveTo(square.GetWorldPosition());
+            
+            OnPiecePlaced?.Invoke(SelectedPiece, square.GetGridPosition());
         
             DeselectCurrentPiece();
         }

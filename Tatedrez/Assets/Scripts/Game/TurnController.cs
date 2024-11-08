@@ -5,23 +5,31 @@ namespace Game
 {
     public class TurnController
     {
+        private readonly VictoryChecker victoryChecker;
         private const PieceColor StartingPlayer = PieceColor.White;
         private PieceColor currentPlayer;
-        private PiecePlacingController piecePlacingController;
-        
-        public TurnController(BoardManager boardManager)
+        private IPiecePlacingController piecePlacingController;
+
+        public TurnController(VictoryChecker victoryChecker)
         {
-            boardManager.OnPiecePlaced += OnPiecePlaced;
+            this.victoryChecker = victoryChecker;
+            currentPlayer = StartingPlayer;
         }
 
-        public void SetPiecePlacingController(PiecePlacingController piecePlacingController)
+        public void SetPiecePlacingController(IPiecePlacingController piecePlacingController)
         {
             this.piecePlacingController = piecePlacingController;
+            piecePlacingController.OnPiecePlaced += OnPiecePlaced;
             this.piecePlacingController.SetActivePlayer(currentPlayer);
         }
 
         private void OnPiecePlaced(PieceController piece, Vector2Int position)
         {
+            if (victoryChecker.IsGameWon(piece, position))
+            {
+                Debug.Log($"Player {piece.Color} won!");
+                return;
+            }
             var currentPlayerColor = piece.Color;
             var otherPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
             if (piecePlacingController.CanMovePiece(otherPlayerColor))
@@ -29,10 +37,13 @@ namespace Game
                 currentPlayer = otherPlayerColor;
                 piecePlacingController.SetActivePlayer(currentPlayer);
             }
-
-            if (!piecePlacingController.CanMovePiece(currentPlayerColor))
+            else
             {
-                Debug.LogError("No player can move a piece. If this happened there is probably some kind of misconfiguration");
+                if (!piecePlacingController.CanMovePiece(currentPlayerColor))
+                {
+                    Debug.LogError(
+                        "No player can move a piece. If this happened there is probably some kind of misconfiguration");
+                }
             }
         }
     }

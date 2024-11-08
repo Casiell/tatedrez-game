@@ -8,7 +8,6 @@ namespace Game
 {
     public class BoardManager
     {
-        public event Action<PieceController, Vector2Int> OnPiecePlaced;
         public event Action<BoardSpace> OnSquareSelected; 
         private BoardSpace[,] boardSpaces;
         private readonly Dictionary<PieceController, BoardSpace> pieceToBoardSpace = new();
@@ -50,7 +49,6 @@ namespace Game
             }
             boardSpace.Piece = piece;
             pieceToBoardSpace[piece] = boardSpace;
-            OnPiecePlaced?.Invoke(piece, position);
             return true;
         }
         

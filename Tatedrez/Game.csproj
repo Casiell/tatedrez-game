@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\FigureMoveController.cs" />
     <Compile Include="Assets\Scripts\Game\BoardManager.cs" />
+    <Compile Include="Assets\Scripts\Game\IPiecePlacingController.cs" />
     <Compile Include="Assets\Scripts\Game\VictoryChecker.cs" />
     <Compile Include="Assets\Scripts\Game\TurnController.cs" />
     <Compile Include="Assets\Scripts\Game\FirstPhasePlacingController.cs" />

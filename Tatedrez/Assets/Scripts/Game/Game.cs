@@ -16,7 +16,7 @@ namespace Game
 
         private List<PieceController> pieces;
     
-        private PiecePlacingController piecePlacingController;
+        private IPiecePlacingController piecePlacingController;
         private BoardGenerator boardGenerator;
         private BoardManager boardManager;
         private VictoryChecker victoryChecker;
@@ -34,7 +34,7 @@ namespace Game
         {
             victoryChecker = new VictoryChecker(boardManager);
             piecePlacingController = new FirstPhasePlacingController(boardManager, this, pieces);
-            turnController = new TurnController(boardManager);
+            turnController = new TurnController(victoryChecker);
             turnController.SetPiecePlacingController(piecePlacingController);
         }
 
@@ -49,7 +49,6 @@ namespace Game
             var squares = boardGenerator.GenerateBoard(gameCamera);
             
             boardManager = new BoardManager(squares);
-            boardManager.OnPiecePlaced += OnPiecePlaced;
         }
 
         private void AdjustFigureSpawnPoints()
@@ -60,11 +59,6 @@ namespace Game
             var boardHeight = boardGenerator.GetHalfBoardHeight();
             whitePieceParent.transform.position = Vector3.up * (boardHeight + halfPieceSize + offset);
             blackPieceParent.transform.position = Vector3.down * (boardHeight + halfPieceSize + offset);
-        }
-
-        private void OnPiecePlaced(PieceController piece, Vector2Int position)
-        {
-            victoryChecker.IsGameWon(piece, position);
         }
 
         public void MoveToNextStep()
