@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squareSize: 6
   boardSize: {x: 3, y: 3}
-  darkPrefab: {fileID: 1256977905929693399, guid: 66d0ffa625f7a0b4980c3825bdc92737, type: 3}
-  lightPrefab: {fileID: 8677787412909744537, guid: 421ca305a34c045409af574ef91a7e98, type: 3}
+  darkPrefab: {fileID: 2623299413496909963, guid: 66d0ffa625f7a0b4980c3825bdc92737, type: 3}
+  lightPrefab: {fileID: 5583280432345651653, guid: 421ca305a34c045409af574ef91a7e98, type: 3}

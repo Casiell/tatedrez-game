@@ -9,17 +9,17 @@ namespace Board
         private int squareSize = 6;
         
         [SerializeField]
-        private Vector2Int boardSize = new Vector2Int(3, 3);
+        private Vector2Int boardSize = new(3, 3);
         
         [SerializeField]
-        private GameObject darkPrefab;
+        private SquareView darkPrefab;
         
         [SerializeField]
-        private GameObject lightPrefab;
-        
+        private SquareView lightPrefab;
+
         public int SquareSize => squareSize;
         public Vector2Int BoardSize => boardSize;
-        public GameObject DarkPrefab => darkPrefab;
-        public GameObject LightPrefab => lightPrefab;
+        public SquareView DarkPrefab => darkPrefab;
+        public SquareView LightPrefab => lightPrefab;
     }
 }
