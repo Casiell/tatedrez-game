@@ -14,9 +14,9 @@ namespace Game
         private IPiecePlacingController piecePlacingController;
         private readonly List<PieceController> pieces;
 
-        public TurnController(VictoryChecker victoryChecker, InfoPanel infoPanel, BoardManager boardManager, List<PieceController> pieces)
+        public TurnController(InfoPanel infoPanel, BoardManager boardManager, List<PieceController> pieces)
         {
-            this.victoryChecker = victoryChecker;
+            victoryChecker = new VictoryChecker(boardManager);
             this.infoPanel = infoPanel;
             this.boardManager = boardManager;
             this.pieces = pieces;

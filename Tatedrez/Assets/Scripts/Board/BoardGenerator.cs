@@ -18,7 +18,7 @@ namespace Board
             return boardSettings.BoardSize.y * boardSettings.SquareSize / 2f;
         }
 
-        public SquareController[,] GenerateBoard(Camera mainCamera)
+        public SquareController[,] GenerateBoard()
         {
             var boardSize = boardSettings.BoardSize;
 
@@ -39,16 +39,8 @@ namespace Board
                 }
             }
 
-            AdjustCameraSize(squares, mainCamera);
             return squares;
         }
-        
-        private void AdjustCameraSize(SquareController[,] squares, Camera mainCamera)
-        {
-            var ratio = Screen.height / (float)Screen.width;
-            mainCamera.orthographicSize = squares.GetLength(1) * boardSettings.SquareSize / 2f * ratio;
-        }
-
 
         private Vector3 GridToWorldPosition(int x, int y)
         {

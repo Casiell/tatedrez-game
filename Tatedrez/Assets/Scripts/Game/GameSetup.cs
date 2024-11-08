@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Game : MonoBehaviour
+    public class GameSetup : MonoBehaviour
     {
         [SerializeField] private Transform boardTransform;
         [SerializeField] private BoardSettings boardSettings;
@@ -21,12 +21,12 @@ namespace Game
         private IPiecePlacingController piecePlacingController;
         private BoardGenerator boardGenerator;
         private BoardManager boardManager;
-        private VictoryChecker victoryChecker;
         private TurnController turnController;
     
         private void Start()
         {
             SetupBoard();
+            AdjustCameraSize();
             AdjustFigureSpawnPoints();
             SetupPieces();
             SetupGameRules();
@@ -34,8 +34,7 @@ namespace Game
 
         private void SetupGameRules()
         {
-            victoryChecker = new VictoryChecker(boardManager);
-            turnController = new TurnController(victoryChecker, infoPanel, boardManager, pieces);
+            turnController = new TurnController(infoPanel, boardManager, pieces);
         }
 
         private void SetupPieces()
@@ -46,11 +45,17 @@ namespace Game
         private void SetupBoard()
         {
             boardGenerator = new BoardGenerator(boardSettings, boardTransform);
-            var squares = boardGenerator.GenerateBoard(gameCamera);
+            var squares = boardGenerator.GenerateBoard();
             
             boardManager = new BoardManager(squares);
         }
-
+        
+        private void AdjustCameraSize()
+        {
+            var ratio = Screen.height / (float)Screen.width;
+            gameCamera.orthographicSize = boardGenerator.GetHalfBoardHeight() * ratio;
+        }
+        
         private void AdjustFigureSpawnPoints()
         {
             const int offset = 1;

@@ -50,9 +50,9 @@
     <Compile Include="Assets\Scripts\Game\IPiecePlacingController.cs" />
     <Compile Include="Assets\Scripts\Game\VictoryChecker.cs" />
     <Compile Include="Assets\Scripts\Game\TurnController.cs" />
+    <Compile Include="Assets\Scripts\Game\GameSetup.cs" />
     <Compile Include="Assets\Scripts\Game\FirstPhasePlacingController.cs" />
     <Compile Include="Assets\Scripts\Game\PiecePlacingController.cs" />
-    <Compile Include="Assets\Scripts\Game\Game.cs" />
     <None Include="Assets\Scripts\Game\Game.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
