@@ -2,6 +2,7 @@
 using Pieces;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -36,7 +37,7 @@ namespace Game
         {
             if (victoryChecker.IsGameWon(piece, position))
             {
-                _ = infoPanel.SetPlayerVictory(piece.Color.ToString());
+                EndGame(piece);
                 return;
             }
 
@@ -57,6 +58,13 @@ namespace Game
                     Debug.LogError("No player can move a piece. If this happened there is probably some kind of misconfiguration");
                 }
             }
+        }
+
+        private async void EndGame(PieceController piece)
+        {
+            currentPlayer = PieceColor.None;
+            await infoPanel.SetPlayerVictory(piece.Color.ToString());
+            SceneManager.LoadScene(0);
         }
 
         private async void ChangePlayer(PieceColor otherPlayerColor)
